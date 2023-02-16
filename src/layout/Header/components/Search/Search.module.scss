@@ -1,0 +1,20 @@
+input:not(:placeholder-shown) ~ button{
+    color: rgb(60, 60, 60) !important;
+}
+
+input{
+    width: 170px;
+}
+
+
+.tippy-my-tooltip-theme {
+    max-width: none;
+  }
+  
+  .tippy-my-tooltip-theme .tippy-content {
+    width: 100%;
+  }
+
+.swapper{
+    width: 100%;
+}
