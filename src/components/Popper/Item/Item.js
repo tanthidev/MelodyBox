@@ -1,32 +1,91 @@
+import { faHeart, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import propTypes from 'prop-types';
-import { Link } from "react-router-dom";
-import { memo } from 'react';
+import { memo, useState, useContext } from 'react';
+import { ThemeContext as hideResultContext} from '~/layout/Header/components/Search/Search';
+import { ThemeContext as changeMusicContext} from '~/layout/Layout';
 
-function Item({to="", src="", title="", subtitle=""}) {
-    // console.log(to);
+function Item({data}) {
+    const setShowReult = useContext(hideResultContext);
+    const handleChangeMusic = useContext(changeMusicContext).handleChangeMusic;
+
+
+    const [showAction, setShowAction] = useState(false);
+
+    var title = data.title;
+    var artistsNames = data.artistsNames;
+
+
+    if(data.title.length>=18){
+        title = title.substring(0,19)+"...";
+    } 
+
+    if(data.artistsNames.length>=18){
+        artistsNames = artistsNames.substring(0,19)+"...";
+    } 
+    
+
+    const handleMouseLeave = () =>{
+        setShowAction(false);
+    }
+
+    const handleMouseEnter = () =>{
+        setShowAction(true);
+    }
+
+    const handlePlay = () => {
+        // console.log(handleChangeMusic);
+        handleChangeMusic(data)
+        // console.log(handleChangeMusic);
+    }
+
     return ( 
-        <Link 
-            to={to}
-            className="flex items-center hover:bg-gray-200 hover:bg-opacity-70 p-2 rounded-xl"
+        <div 
+            className="flex justify-between items-center hover:bg-gray-200 hover:bg-opacity-70 p-2 rounded-xl cursor-pointer"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave ={handleMouseLeave}
+            onClick={()=>{setShowReult(false)}}
         >
-            <img 
-                src={src}
-                // src="https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/avatars/8/a/a/b/8aab7a0386dd9c24b90adcc5ef5a7814.jpg"
-                alt="aaa"
-                className="w-13 h-auto rounded-full mr-2"
-            />
-            <div>
-                <h3 className="text-2xl">{title}</h3>
-                <h3 className="text-xl">{subtitle}</h3>
+            <div className='flex items-center w-10/12'>
+                {/* Image */}
+                <div  
+                    className='relative'
+                >
+                    <img 
+                        src={data.thumbnailM}
+                        alt="aaa"
+                        className="w-13 h-auto rounded-full mr-2"
+                    />
+                    {/* {
+                        !showAction || <CoverItemSong  data={data} />
+                    } */}
+                </div>
+                
+                {/* Name */}
+                <div>
+                    <h3 className="text-2xl">{title}</h3>
+                    <h3 className="text-xl">{artistsNames}</h3>
+                </div>
             </div>
-        </Link>
+            
+            <div className='w-1/6 px-1'>
+                {!showAction || 
+                    <div className='flex justify-between items-center'>
+                        <FontAwesomeIcon 
+                            className="text-gray-500 hover:text-gray-800" 
+                            icon={faPlay} 
+                            onClick={handlePlay}/>
+                        <FontAwesomeIcon className='text-gray-500 hover:text-gray-800' icon={faHeart}/>
+                    </div>
+                }
+            </div>
+
+
+        </div>
      );
 }
 
 Item.propTypes = {
-    to: propTypes.string,
-    src: propTypes.string,
-    name: propTypes.string,   
-    type: propTypes.string,   
+    data: propTypes.object
 }
 export default memo(Item);

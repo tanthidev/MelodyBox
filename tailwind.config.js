@@ -6,7 +6,7 @@ module.exports = {
     extend: {
       //Spacing
       spacing: {
-        'content': '1150px',
+        'content': '100%',
         '0': '0px',
         '1': '4px',
         '2': '8px',
@@ -47,6 +47,10 @@ module.exports = {
       colors: {
         'purple-main': '#9371ba', 
         'orange-main': '#ffeede'
+      },
+
+      borderRadius: {
+        '4xl' : '32px'
       }
       
 

@@ -7,13 +7,10 @@ function Swapper({data}) {
             <h3 className="mb-2 font-semibold">Suggested results</h3>
             {data.map((item, index) => 
                 (
-                    // console.log(item.artistsNames)
+
                     <Item
+                        data={item}
                         key={index}
-                        to={item.link}
-                        src={item.thumbnail}
-                        title={item.title}
-                        subtitle={item.artistsNames}
                     />
                 )
             )}
