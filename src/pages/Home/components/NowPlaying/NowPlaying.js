@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useLayoutEffect } from "react";
 import { useState } from "react";
 import BarControl from "~/components/BarControl";
 import * as apis from '~/apis'
@@ -10,6 +10,7 @@ function NowPlaying() {
     var autoPlay = true;
 
     var data = context.CurrentMusic;
+
     const dataBackUp = {
         encodeId: 'ZO6Z087D',
         title: 'Astronaut In The Ocean',
@@ -28,22 +29,23 @@ function NowPlaying() {
     const [audio, setAudio] = useState('');
     useEffect(()=>{ 
         const fetchApi = async () => {
+            setNotice('');
             const response = await apis.Song(data.encodeId);
-            if(!!response.data.data){
+            console.log(response);
+            if(response.data.err === 0){
                 setAudio(response.data.data[`128`]);
                 setNotice('');
             } else {
                 setAudio('')
-                if(response.data.err === -1150){
-                    setNotice(response.data.msg);
-                }
+                setNotice(response.data.msg);
             }
 
         }
 
         fetchApi();
     },[data])
-
+    
+    console.log("render");
     return ( 
         <div className="h-1/2 pb-15 pr-10">
             <h2 className="font-extrabold text-4xl mb-3">Now Playing</h2>

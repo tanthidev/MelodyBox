@@ -31,11 +31,14 @@ function BarControl({src, autoPlay}) {
     const handlePlay = () => {
         setIsPlaying(!isPlaying);
         if (isPlaying) {
-        audioPlayer.current.pause();
+            audioPlayer.current.pause();
         } else {
-        audioPlayer.current.play();
+            audioPlayer.current.play();
+            console.log(audioPlayer);
         }
     }
+
+
 
 
 
