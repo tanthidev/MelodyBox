@@ -1,6 +1,7 @@
 import { faCompactDisc, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Menu from '~/components/Menu'
+import { memo } from 'react';
 
 function SideBar () {
 
@@ -30,4 +31,4 @@ function SideBar () {
     );
 }
 
-export default SideBar;
+export default memo(SideBar);

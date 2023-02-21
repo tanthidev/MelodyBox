@@ -55,11 +55,11 @@ function BarControl({src, autoPlay}) {
 
 
     //Auto play
-    useEffect(()=>{
-        if(!!src){
-            audioPlayer.current.play();
-        }
-    }, [src])
+    // useEffect(()=>{
+    //     if(audioPlayer){
+    //         audioPlayer.current.play();
+    //     }
+    // }, [src])
 
 
   return (
@@ -68,6 +68,7 @@ function BarControl({src, autoPlay}) {
         <div className="flex items-center text-xl">
                     {/* <div className="bg-gray-800 text-white py-4 px-6 rounded-lg shadow-md"> */}
                         <audio
+                            autoPlay 
                             src={src}
                             ref={audioPlayer}
                             onTimeUpdate={handleTimeUpdate}

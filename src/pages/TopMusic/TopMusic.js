@@ -5,10 +5,10 @@ import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
-import SlideItem from "~/components/Slide/ItemSlide/ItemSlide";
+import SlideItem from "./ItemSlide/ItemSlide";
 import * as apis from "~/apis"
 
-function Slide(){
+function TopMusic(){
 
     const [results, setResults] = useState([])
     useEffect(()=>{
@@ -83,6 +83,5 @@ function Slide(){
     </div>
 );
 };
-  
 
-export default Slide;
+export default TopMusic;

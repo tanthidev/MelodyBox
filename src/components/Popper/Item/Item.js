@@ -1,14 +1,18 @@
-import { faHeart, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faPlay, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import propTypes from 'prop-types';
 import { memo, useState, useContext } from 'react';
 import { ThemeContext as hideResultContext} from '~/layout/Header/components/Search/Search';
-import { ThemeContext as changeMusicContext} from '~/layout/Layout';
+import { ThemeContext} from '~/layout/Layout';
 
-function Item({data}) {
+function Item ({data, hideResult=true, textLimit=18, unFavorite=false}) {
+
+
     const setShowReult = useContext(hideResultContext);
-    const handleChangeMusic = useContext(changeMusicContext).handleChangeMusic;
 
+    // Context layout
+    const {favorites, handleChangeMusic, handleRemoveFavorite, handleAddFavorites} = useContext(ThemeContext);
+    const [favotite, setFavorite] = useState(favorites.includes(data.encodeId))
 
     const [showAction, setShowAction] = useState(false);
 
@@ -16,12 +20,12 @@ function Item({data}) {
     var artistsNames = data.artistsNames;
 
 
-    if(data.title.length>=18){
-        title = title.substring(0,19)+"...";
+    if(data.title.length>=textLimit){
+        title = title.substring(0,textLimit)+"...";
     } 
 
-    if(data.artistsNames.length>=18){
-        artistsNames = artistsNames.substring(0,19)+"...";
+    if(data.artistsNames.length>=textLimit){
+        artistsNames = artistsNames.substring(0,textLimit)+"...";
     } 
     
 
@@ -37,6 +41,20 @@ function Item({data}) {
         // console.log(handleChangeMusic);
         handleChangeMusic(data)
         // console.log(handleChangeMusic);
+        handleHideResult();
+    }
+
+    const handleHideResult = ()=>{
+        hideResult && setShowReult(false);
+    }
+
+    const handlRemove = () =>{
+        handleRemoveFavorite(data.encodeId);
+    }
+
+    const handleAdd = () =>{
+        handleAddFavorites(data.encodeId);
+        setFavorite(true);
     }
 
     return ( 
@@ -44,15 +62,17 @@ function Item({data}) {
             className="flex justify-between items-center hover:bg-gray-200 hover:bg-opacity-70 p-2 rounded-xl cursor-pointer"
             onMouseEnter={handleMouseEnter}
             onMouseLeave ={handleMouseLeave}
-            onClick={()=>{setShowReult(false)}}
+            
         >
-            <div className='flex items-center w-10/12'>
+            <div className='flex items-center w-10/12'
+                onClick={handleHideResult}
+            >
                 {/* Image */}
                 <div  
                     className='relative'
                 >
                     <img 
-                        src={data.thumbnailM}
+                        src={data.thumbnail}
                         alt="aaa"
                         className="w-13 h-auto rounded-full mr-2"
                     />
@@ -74,8 +94,20 @@ function Item({data}) {
                         <FontAwesomeIcon 
                             className="text-gray-500 hover:text-gray-800" 
                             icon={faPlay} 
-                            onClick={handlePlay}/>
-                        <FontAwesomeIcon className='text-gray-500 hover:text-gray-800' icon={faHeart}/>
+                            onClick={handlePlay}
+                            />
+                        {
+                            !unFavorite 
+                                ? <FontAwesomeIcon className='text-gray-500 hover:text-gray-800' 
+                                style={favotite && {color: 'red'}}
+                                    icon={faHeart}
+                                    onClick={handleAdd}/>
+                                : <FontAwesomeIcon 
+                                    className='text-gray-500 hover:text-gray-800 mr-2' 
+                                    icon={faTrash}
+                                    onClick={handlRemove}/>  
+                        }
+                        
                     </div>
                 }
             </div>

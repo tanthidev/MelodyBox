@@ -70,7 +70,6 @@ function NowPlaying() {
                     <p className="font-bold">{data.title}</p>
                     <p className="text-gray-500 text-2xl">{data.artistsNames}</p>
                 </div>
-
                 <BarControl src={audio} autoPlay={autoPlay}/>
                 {!(!!notice) || (
                     <p

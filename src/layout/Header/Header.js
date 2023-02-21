@@ -1,12 +1,13 @@
 import { faBell, faGear } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Search from "./components/Search";
+import { memo } from "react";
 
 function Header () {
     return (
         <div className="flex justify-between h-20 border-b-2 border-gray-300 items-center pr-8">
+            
             <Search/>
-
             {/* Action */}
             <div className="h-full flex items-center border-l-2 border-gray-300 pl-8">
                 <FontAwesomeIcon
@@ -22,4 +23,4 @@ function Header () {
     );
 }
 
-export default Header;
+export default memo(Header);

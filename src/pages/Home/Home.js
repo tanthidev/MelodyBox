@@ -1,7 +1,7 @@
 // import { useState } from "react";
-import Slide from "~/components/Slide";
+import Slide from '~/pages/Slide';
 import NowPlaying from "./components/NowPlaying";
-import MostPlayed from "./components/MostPlayed";
+import FavoritesList from "./components/FavoritesList";
 
 
 function Home(){
@@ -14,7 +14,7 @@ function Home(){
 
             <div className="grid grid-cols-2 mt-3 h-screen">
               <NowPlaying/>
-              <MostPlayed/>
+              <FavoritesList/>
             </div>
           </div>
       );
