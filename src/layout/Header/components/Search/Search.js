@@ -78,7 +78,7 @@ function Search() {
                     arrow={false}
                     
                     >
-                        <form className="flex justify-between bg-white h-10 rounded-xl items-center pl-3 w-full">
+                        <div className="flex justify-between bg-white h-10 rounded-xl items-center pl-3 w-full">
                             {/* Input */}
                             <input 
                                 id="search" 
@@ -106,7 +106,7 @@ function Search() {
                                     className="w-5 ml-2 pr-3"
                                 />
                             </button>
-                        </form>
+                        </div>
                 </Tippy>
                 
         </div>

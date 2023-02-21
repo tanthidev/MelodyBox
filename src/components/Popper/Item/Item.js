@@ -62,6 +62,7 @@ function Item ({data, hideResult=true, textLimit=18, unFavorite=false}) {
             className="flex justify-between items-center hover:bg-gray-200 hover:bg-opacity-70 p-2 rounded-xl cursor-pointer"
             onMouseEnter={handleMouseEnter}
             onMouseLeave ={handleMouseLeave}
+            onClick={handlePlay}
             
         >
             <div className='flex items-center w-10/12'
